@@ -30,7 +30,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     
     - name: Publish functions
-      run: dotnet publish --configuration Release --output ${{ env.OUTPUT_PATH }}
+      run: dotnet publish --configuration Debug --output ${{ env.OUTPUT_PATH }}
 
     - name: Package functions
       uses: actions/upload-artifact@v1
