@@ -1,4 +1,6 @@
 name: .NET Core
+env:
+  OUTPUT_PATH: ${{ github.workspace }}/.output
 
 on:
   push:
@@ -12,23 +14,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
     - uses: actions/checkout@v2
+      
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
+    
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Login to Azure
-      uses: azure/login@v1
+    
+    - name: Publish functions
+      run: dotnet publish --configuration Release --output ${{ env.OUTPUT_PATH }}
+
+    - name: Package functions
+      uses: actions/upload-artifact@v1
       with:
-        creds: ${{ secrets.azure_credentials }}
-    - name: Azure Functions Action
-      uses: Azure/functions-action@v1.1.5
-      with:
-        # Name of the Azure Function App
-        app-name: thefunctionslinux2
+        name: functions
+        path: ${{ env.OUTPUT_PATH }}
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    env:
+      FUNC_APP_NAME: thefunctionslinux2
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v1
+        with:
+          name: functions
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: "Run Azure Functions Action"
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.FUNC_APP_NAME }}
+          package: ${{ env.OUTPUT_PATH }}
