@@ -23,6 +23,10 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.azure_credentials }}
     - name: Azure Functions Action
       uses: Azure/functions-action@v1.1.5
       with:
