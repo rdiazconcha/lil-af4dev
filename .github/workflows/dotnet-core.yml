@@ -1,6 +1,6 @@
 name: .NET Core
 env:
-  OUTPUT_PATH: ${{ github.workspace }}/.output
+  OUTPUT_PATH: ${{ github.workspace }}/output
 
 on:
   push:
