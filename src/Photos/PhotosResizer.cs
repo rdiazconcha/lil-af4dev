@@ -13,7 +13,7 @@ namespace Photos
     public static class PhotosResizer
     {
         [FunctionName("PhotosResizer")]
-        public static async Task Run([BlobTrigger("photos/{name}", Connection = "")]Stream myBlob, 
+        public static async Task Run([BlobTrigger("photos/{name}", Connection = Literals.StorageConnectionString)]Stream myBlob, 
             [Blob("photos-small/{name}", FileAccess.Write, Connection = Literals.StorageConnectionString)] Stream imageSmall,
             [Blob("photos-medium/{name}", FileAccess.Write, Connection = Literals.StorageConnectionString)] Stream imageMedium,
             ILogger logger)
