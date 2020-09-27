@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
         path: ${{ env.OUTPUT_PATH }}
   
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: [build]
     env:
       FUNC_APP_NAME: thefunctionslinux2
