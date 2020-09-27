@@ -32,6 +32,11 @@ namespace Photos
             {
                 logger?.LogError(ex.ToString());
             }
+            finally
+            {
+                imageSmall.Close();
+                imageMedium.Close();
+            }
         }
 
         private static MemoryStream CreateMemoryStream(Stream image, ImageSize imageSize)
