@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: echo
+      run: echo ${{ env.OUTPUT_PATH }}
+      
     - name: Checkout
       uses: actions/checkout@v2
     
