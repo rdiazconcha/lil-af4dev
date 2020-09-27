@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     env:
-      FUNC_APP_NAME: thefunctionslinux2
+      FUNC_APP_NAME: thefunctions
     steps:
       - name: Download
         uses: actions/download-artifact@v1
