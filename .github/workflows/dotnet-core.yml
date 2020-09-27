@@ -1,6 +1,6 @@
 name: .NET Core
 env:
-  OUTPUT_PATH: ${{ github.workspace }}/output
+  OUTPUT_PATH: ${{ github.workspace }}/src/Photos/bin/Release/netcoreapp3.1/publish
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     
     - name: Publish functions
-      run: dotnet publish --configuration Debug --output ${{ env.OUTPUT_PATH }}
+      run: dotnet publish --configuration Release
 
     - name: Package functions
       uses: actions/upload-artifact@v1
