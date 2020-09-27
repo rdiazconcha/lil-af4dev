@@ -22,11 +22,11 @@ namespace Photos
 
             try
             {
-                var msMedium = CreateMemoryStream(myBlob, ImageSize.Medium);
+                using var msMedium = CreateMemoryStream(myBlob, ImageSize.Medium);
                 await msMedium.CopyToAsync(imageMedium);
 
-                var msSmall = CreateMemoryStream(myBlob, ImageSize.Small);
-                await msSmall.CopyToAsync(imageSmall);
+                using var msSmall = CreateMemoryStream(myBlob, ImageSize.Small);
+                await msSmall.CopyToAsync(imageSmall)
             }
             catch (Exception ex)
             {
