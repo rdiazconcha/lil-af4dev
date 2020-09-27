@@ -26,7 +26,7 @@ namespace Photos
                 await msMedium.CopyToAsync(imageMedium);
 
                 using var msSmall = CreateMemoryStream(myBlob, ImageSize.Small);
-                await msSmall.CopyToAsync(imageSmall)
+                await msSmall.CopyToAsync(imageSmall);
             }
             catch (Exception ex)
             {
