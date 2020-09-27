@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE98E82A-D2A8-4FE5-9276-845C1DBC0745}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Photos", "src\Photos\Photos.csproj", "{FD86E3B5-49FE-48EC-8A96-9713B245E9AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photos", "src\Photos\Photos.csproj", "{FD86E3B5-49FE-48EC-8A96-9713B245E9AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Photos.AnalyzerService", "src\Photos.AnalyzerService\Photos.AnalyzerService.csproj", "{9014E72E-E7D8-4414-8504-DFDFE8425096}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photos.AnalyzerService", "src\Photos.AnalyzerService\Photos.AnalyzerService.csproj", "{9014E72E-E7D8-4414-8504-DFDFE8425096}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photos.AnalyzerService.Abstractions", "src\Photos.AnalyzerService.Abstractions\Photos.AnalyzerService.Abstractions.csproj", "{E21235FB-4973-4B59-98E5-9FAB61A20E30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Photos.AnalyzerService.Abstractions", "src\Photos.AnalyzerService.Abstractions\Photos.AnalyzerService.Abstractions.csproj", "{E21235FB-4973-4B59-98E5-9FAB61A20E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FD86E3B5-49FE-48EC-8A96-9713B245E9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -61,9 +56,10 @@ Global
 		{E21235FB-4973-4B59-98E5-9FAB61A20E30}.Release|x86.ActiveCfg = Release|Any CPU
 		{E21235FB-4973-4B59-98E5-9FAB61A20E30}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{FD86E3B5-49FE-48EC-8A96-9713B245E9AF} = {FE98E82A-D2A8-4FE5-9276-845C1DBC0745}
-		{9014E72E-E7D8-4414-8504-DFDFE8425096} = {FE98E82A-D2A8-4FE5-9276-845C1DBC0745}
-		{E21235FB-4973-4B59-98E5-9FAB61A20E30} = {FE98E82A-D2A8-4FE5-9276-845C1DBC0745}
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {604E3A1B-8CEC-4A45-A797-3D2C54B11D87}
 	EndGlobalSection
 EndGlobal
