@@ -1,11 +1,7 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Photos.AnalyzerService.Abstractions;
 using Photos.Models;
 using System;
 using System.IO;
@@ -15,16 +11,9 @@ namespace Photos
 {
     public class PhotosStorage
     {
-        private readonly IAnalyzerService analyzerService;
-
-        public PhotosStorage(IAnalyzerService analyzerService)
-        {
-            this.analyzerService = analyzerService;
-        }
-
         [FunctionName("PhotosStorage")]
-        public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+        public async Task<byte[]> Run(
+            [ActivityTrigger] PhotoUploadModel request,
             [Blob("photos", FileAccess.ReadWrite, Connection = Literals.StorageConnectionString)] CloudBlobContainer blobContainer,
             [CosmosDB("photos", 
                       "metadata", 
@@ -32,9 +21,6 @@ namespace Photos
                       CreateIfNotExists = true)] IAsyncCollector<dynamic> items,
             ILogger logger)
         {
-            var body = await new StreamReader(req.Body).ReadToEndAsync();
-            var request = JsonConvert.DeserializeObject<PhotoUploadModel>(body);
-
             var newId = Guid.NewGuid();
             var blobName = $"{newId}.jpg";
 
@@ -44,21 +30,18 @@ namespace Photos
             var photoBytes = Convert.FromBase64String(request.Photo);
             await cloudBlockBlob.UploadFromByteArrayAsync(photoBytes, 0, photoBytes.Length);
 
-            var analysisResult = await analyzerService.AnalyzeAsync(photoBytes);
-
             var item = new
             {
                 id = newId,
                 name = request.Name,
                 description = request.Description,
-                tags = request.Tags,
-                analysis = analysisResult
+                tags = request.Tags
             };
             await items.AddAsync(item);
 
             logger?.LogInformation($"Successfully uploaded {newId}.jpg file and its metadata");
 
-            return new OkObjectResult(newId);
+            return photoBytes;
         }
     }
 }
