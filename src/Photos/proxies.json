@@ -21,13 +21,6 @@
         "route": "/api/v1/search"
       },
       "backendUri": "https://af4dev.azurewebsites.net/api/PhotosSearch"
-    },
-    "homeProxy":{
-      "matchCondition": {
-        "methods": [ "GET" ],
-        "route": "/api/v1/home"
-      },
-      "backendUri": "https://af4dev.azurewebsites.net/"
     }
   }
 }
