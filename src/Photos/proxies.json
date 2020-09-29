@@ -4,7 +4,7 @@
     "storageProxy": {
       "matchCondition": {
         "methods": [ "POST" ],
-        "route": "/api/v1/photos"
+        "route":  "/api/v1/photos"
       },
       "backendUri": "https://af4dev.azurewebsites.net/api/PhotosStorage"
     },
