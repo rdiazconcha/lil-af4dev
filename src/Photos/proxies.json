@@ -18,9 +18,9 @@
     "searchProxy": {
       "matchCondition": {
         "methods": [ "GET" ],
-        "route": "/api/v1/photos/search?s={term}"
+        "route": "/api/v1/search"
       },
-      "backendUri": "https://af4dev.azurewebsites.net/api/PhotosSearch?searchTerm={term}"
+      "backendUri": "https://af4dev.azurewebsites.net/api/PhotosSearch"
     }
   }
 }
