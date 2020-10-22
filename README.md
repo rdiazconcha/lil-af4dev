@@ -1,2 +1,2 @@
-# lil-af4dev
-Azure Functions for Developers
+# Azure Functions for Developers
+## LinkedIn Learning training course
